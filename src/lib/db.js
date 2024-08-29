@@ -6,6 +6,5 @@ export async function connectDB() {
         console.log("🍃 Mongodb connected")
     } catch (error) {
         console.error(`DB connection Error:`, error);
-
     }
 }

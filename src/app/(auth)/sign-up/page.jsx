@@ -1,23 +1,32 @@
-import { signIn } from '@/auth';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import Link from 'next/link';
-import React from 'react';
+import { register } from "@/app/action/authAction";
+import { signIn } from "@/auth";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import Link from "next/link";
+import React from "react";
 import { FcGoogle } from "react-icons/fc";
 
-const Page = () => {
+const RegisterPage = () => {
     return (
-        <div className='flex items-center justify-center min-h-screen'>
-            <div className="w-full max-w-sm p-8 border rounded-lg shadow-md">
-                <h2 className="mb-6 text-2xl font-bold text-center">Sign In</h2>
+        <div className="flex min-h-screen items-center justify-center">
+            <div className="w-full max-w-sm p-8 rounded-lg shadow-md border">
+                <h2 className="mb-6 text-2xl font-bold text-center">Register</h2>
 
-                {/* Email and Password Sign In Form */}
-                <form
-                    action={async (formData) => {
-                        "use server"
-                        await signIn("credentials", formData)
-                    }}
-                    className="space-y-4">
+                {/* Registration Form */}
+                <form action={register} className="space-y-4">
+                    <div>
+                        <label htmlFor="fullName" className="block text-sm font-medium">
+                            Full Name
+                        </label>
+                        <Input
+                            type="text"
+                            name="fullName"
+                            placeholder="Enter your full name"
+                            className="mt-1"
+                            required
+                        />
+                    </div>
+
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium">
                             Email
@@ -45,11 +54,13 @@ const Page = () => {
                     </div>
 
                     <Button type="submit" className="w-full">
-                        Sign In
+                        Sign Up
                     </Button>
                 </form>
-                <p className='my-2'>Don't have an account, Please <Link href="sign-up" className='text-blue-600'>Sign Up</Link></p>
-                {/* Google Sign In Form */}
+
+                <p className="my-2">Don't have an account, Please <Link href="sign-in" className='text-blue-600'>Sign In</Link></p>
+
+                {/* Google Sign In */}
                 <form
                     action={async () => {
                         "use server";
@@ -67,4 +78,4 @@ const Page = () => {
     );
 };
 
-export default Page;
+export default RegisterPage;
