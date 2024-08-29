@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import GlobalNav from "@/components/my-ui/GlobalNav";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
         <main className="min-h-screen flex flex-col absolute w-full">{children}
           <GlobalNav />
         </main>
+        <Toaster />
       </body>
     </html>
   );

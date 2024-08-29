@@ -20,6 +20,7 @@ const GlobalNav = async () => {
             <div><Link href="/sign-in">Sign In</Link></div>
             <div><Link href="/sign-up">Sign Up</Link></div>
             <form
+                className={`${!session?.user && 'hidden'}`}
                 action={async () => {
                     "use server"
                     await signOut()
