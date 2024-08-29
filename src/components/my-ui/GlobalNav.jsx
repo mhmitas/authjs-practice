@@ -6,7 +6,7 @@ import { Button } from '../ui/button';
 
 const GlobalNav = async () => {
     const session = await auth()
-    // console.log(session);
+    console.log(session);
 
 
     return (

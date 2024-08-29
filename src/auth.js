@@ -63,12 +63,26 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             session.user.id = token.id
             return session
         },
-        async signIn({ user, account, profile }) {
-            if (account.provider === "google") {
-                console.log(account.provider)
+        async signIn({ user, account }) {
+            if (account.provider === 'google') {
+                try {
+                    const { email, name, image, authProviderId: id } = user;
+                    console.log('UUUser', user)
+                    await connectDB()
+                    const isExists = await User.exists({ email })
+                    console.log({ isExists: !!isExists })
+                    if (!isExists) {
+                        await User.create({ email, name, image, authProviderId })
+                        return user
+                    }
+                    return user
+
+                } catch (error) {
+                    throw new Error("Google sign in error:", error)
+                }
             }
-            return true
-        },
+            return user
+        }
     },
     pages: {
         signIn: "/sign-in",

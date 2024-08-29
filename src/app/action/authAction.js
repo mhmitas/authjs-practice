@@ -1,10 +1,9 @@
 "use server"
 
+import { signIn } from "@/auth"
 import { connectDB } from "@/lib/db"
 import { User } from "@/lib/models/userModel"
-import { redirect } from "next/navigation"
-import { compare, hash } from "bcryptjs"
-import { signIn } from "@/auth"
+import { hash } from "bcryptjs"
 
 export const register = async (formData) => {
     const fullName = formData.get("fullName")
@@ -25,7 +24,7 @@ export const register = async (formData) => {
     const hashedPassword = await hash(password, 12)
     await User.create({ fullName, email, password: hashedPassword })
     console.log(`user created successfully`)
-    signIn('credentials', { email, password })
-    console.log('call sign in')
-    // redirect('/sign-in')
+
+    // sign in user
+    await signIn('credentials', { email, password })
 }

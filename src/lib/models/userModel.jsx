@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose"
 
 const userSchema = new Schema(
     {
-        fullName: {
+        name: {
             type: String,
             required: true
         },
@@ -20,9 +20,6 @@ const userSchema = new Schema(
         image: {
             type: String
         },
-        authProviderId: {
-            type: String
-        }
     },
     { timestamps: true }
 )
